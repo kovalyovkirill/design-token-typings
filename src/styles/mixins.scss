@@ -1,0 +1,65 @@
+@use "sass:string";
+
+/**
+ * Spacing mixins for generating margin and padding classes
+ * Usage: @include generate-spacing-classes(2, 64, 2);
+ */
+
+@mixin generate-spacing-properties($property, $start, $end, $step) {
+  $directions: (
+          '': $property,
+          't': #{$property}-top,
+          'r': #{$property}-right,
+          'b': #{$property}-bottom,
+          'l': #{$property}-left
+  );
+
+  $combinations: (
+          'x': (#{$property}-left, #{$property}-right),
+          'y': (#{$property}-top, #{$property}-bottom)
+  );
+
+  @for $i from $start through $end {
+    @if $i % $step == 0 {
+      // Single direction properties (m, mt, mr, mb, ml or p, pt, pr, pb, pl)
+      @each $suffix, $css-property in $directions {
+        .Space__#{string.slice($property, 1, 1)}#{$suffix}-#{$i} {
+          #{$css-property}: #{$i}px;
+        }
+      }
+
+      // Combined properties (mx, my or px, py)
+      @each $suffix, $properties in $combinations {
+        .Space__#{string.slice($property, 1, 1)}#{$suffix}-#{$i} {
+          @each $css-property in $properties {
+            #{$css-property}: #{$i}px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin generate-gap-classes($start: 2, $end: 64, $step: 2) {
+  @for $i from $start through $end {
+    @if $i % $step == 0 {
+      .Gap__#{$i} {
+        gap: #{$i}px;
+      }
+
+      .Gap__x-#{$i} {
+        column-gap: #{$i}px;
+      }
+
+      .Gap__y-#{$i} {
+        row-gap: #{$i}px;
+      }
+    }
+  }
+}
+
+@mixin generate-spacing-classes($start: 2, $end: 64, $step: 2) {
+  @include generate-spacing-properties('margin', $start, $end, $step);
+  @include generate-spacing-properties('padding', $start, $end, $step);
+  @include generate-gap-classes($start, $end, $step);
+}

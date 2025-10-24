@@ -1,0 +1,3 @@
+@use './mixins' as m;
+
+@include m.generate-spacing-classes(2, 64, 2);
