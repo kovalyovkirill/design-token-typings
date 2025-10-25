@@ -49,4 +49,5 @@ import '../styles/colors.scss';
 
 ---
 
-Создано на основе Vite + React + TypeScript
+## TG
+Frontend pulse - https://t.me/kovalev_frontend
