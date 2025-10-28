@@ -49,5 +49,6 @@ import '../styles/colors.scss';
 
 ---
 
-## TG
-Frontend pulse - https://t.me/kovalev_frontend
+## Остались вопросы?
+Напиши в тг: https://t.me/koval4ik
+Новости фронтенда: Frontend pulse - https://t.me/kovalev_frontend
